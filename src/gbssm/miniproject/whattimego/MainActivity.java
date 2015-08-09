@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 // woosung test
-// jiae test
+// jiae test 222
 public class MainActivity extends Activity {
 
 	@Override
