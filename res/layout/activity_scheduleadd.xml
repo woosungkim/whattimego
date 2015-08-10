@@ -1,17 +1,101 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="gbssm.miniproject.whattimego.MainActivity" >
+    android:paddingTop="@dimen/activity_vertical_margin" 
+    android:background="#FFFFFF" >
 
-    <TextView
+    <EditText
+        android:id="@+id/editScheduleName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="일정 이름을 입력하세요"
+        android:padding="@dimen/activity_margin" />
+
+    <EditText
+        android:id="@+id/editDestination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="목적지를 입력하세요"
+        android:padding="@dimen/activity_margin"
+        android:textSize="20dp" />
+
+    <CheckBox
+        android:id="@+id/checkboxRepeat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="일정 추가 페이지"
-        />
+        android:padding="@dimen/activity_margin"
+        android:text="반복" />
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_margin" >
+
+        
+
+        <CheckBox
+            android:id="@+id/checkMon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="월" />
+
+        <CheckBox
+            android:id="@+id/checkTues"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="화" />
+
+        <CheckBox
+            android:id="@+id/checkWedn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수" />
+
+        <CheckBox
+            android:id="@+id/checkThur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="목" />
+
+        <CheckBox
+            android:id="@+id/checkFri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="금" />
+
+        <CheckBox
+            android:id="@+id/checkSat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="토" />
+        
+        <CheckBox
+            android:id="@+id/checkSun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일" />
+        
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_margin"
+        android:text="시간 선택"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_margin"
+        android:text="완료" />
+
+</LinearLayout>

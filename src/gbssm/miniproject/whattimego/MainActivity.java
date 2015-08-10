@@ -1,4 +1,4 @@
-package gbssm.miniproject.whattimego;
+/*package gbssm.miniproject.whattimego;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.MenuItem;
 // woosung test
 // jiae test 222
 // doohyun test
->>>>>>> 5eabc4d37ae0c72bb44dae4d63aac91d00b5d903
+
 public class MainActivity extends Activity {
 
 	@Override
@@ -35,3 +35,4 @@ public class MainActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 }
+*/

@@ -3,6 +3,7 @@ package gbssm.miniproject.whattimego;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 public class ScheduleListAdapter extends BaseAdapter {
 
+	private DBManager dbManager;
 	private ArrayList<ScheduleListItem> scheduleList;
 
 	// 생성자
@@ -40,6 +42,8 @@ public class ScheduleListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final int pos = position;
 		final Context context = parent.getContext();
+		
+		Button btnDelete = null;
 
 		TextView scheduleName = null;
 		TextView dayOfWeek = null;
@@ -49,6 +53,8 @@ public class ScheduleListAdapter extends BaseAdapter {
 		Button btnOnOff = null;
 
 		ScheduleListHolder holder = null;
+		
+		dbManager = new DBManager( context, "ScheduleList.db", null, 2 );
 
 		// 리스트가 길어지면서 현재 화면에 보이지 않는 아이템은 convertView가 null인 상태로 들어 옴
 		if (convertView == null) {
@@ -59,6 +65,8 @@ public class ScheduleListAdapter extends BaseAdapter {
 					false);
 
 			// 뷰 가져오기
+			btnDelete = (Button) convertView.findViewById( R.id.btnDelete );
+			
 			scheduleName = (TextView) convertView
 					.findViewById(R.id.txtScheduleName);
 			dayOfWeek = (TextView) convertView.findViewById(R.id.txtDayOfWeek);
@@ -69,22 +77,27 @@ public class ScheduleListAdapter extends BaseAdapter {
 
 			// 홀더 생성 및 tag로 등록
 			holder = new ScheduleListHolder();
+			
+			holder.m_BtnDelete = btnDelete;
+			
 			holder.m_ScheduleName = scheduleName;
 			holder.m_DayOfWeek = dayOfWeek;
 			holder.m_Location = location;
 			holder.m_Time = time;
 			
-			holder.m_Btn = btnOnOff;
+			holder.m_BtnOnOff = btnOnOff;
 			
 			convertView.setTag(holder);
 		} else {
 			holder = (ScheduleListHolder) convertView.getTag();
+			btnDelete = holder.m_BtnDelete;
+			
 			scheduleName = holder.m_ScheduleName;
 			dayOfWeek = holder.m_DayOfWeek;
 			location = holder.m_Location;
 			time = holder.m_Time;
 
-			btnOnOff = holder.m_Btn;
+			btnOnOff = holder.m_BtnOnOff;
 		}
 
 		scheduleName.setText(scheduleList.get(position).getScheduleName());
@@ -96,8 +109,28 @@ public class ScheduleListAdapter extends BaseAdapter {
 			btnOnOff.setText( "ON" );
 		else
 			btnOnOff.setText( "OFF" );
+		
+		
+		
+		// delete 버튼 터치 이벤트
+		btnDelete.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
 
-		// 버튼 터치 이벤트
+				// 해당 일정 DB에서 삭제
+				dbManager.delete( "DELETE FROM SCHEDULE_LIST WHERE s_id = " + ((ScheduleListItem)getItem(pos)).getsid() + ";");
+				// 리스트뷰에서 삭제
+				scheduleList.remove( pos );				
+				
+				notifyDataSetChanged();
+				
+				Toast.makeText(context,
+						"일정이 삭제되었습니다",
+						Toast.LENGTH_SHORT).show();
+			}
+		});
+
+
+		// onoff 버튼 터치 이벤트
 		btnOnOff.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				// 터치 시 아이템 이름 출력
@@ -110,7 +143,7 @@ public class ScheduleListAdapter extends BaseAdapter {
 		// 리스트 아이템 터치 시 이벤트
 		convertView.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Toast.makeText(context, "리스트 클릭 : " + scheduleList.get(pos),
+				Toast.makeText(context, "리스트 클릭 : " + pos + "  s_id : " + ((ScheduleListItem)getItem(pos)).getsid(),
 						Toast.LENGTH_SHORT).show();
 			}
 
@@ -131,6 +164,8 @@ public class ScheduleListAdapter extends BaseAdapter {
 
 	// 각 리스트 아이템
 	static class ScheduleListItem {
+		private int s_id;
+		
 		private String strScheduleName;
 		private String strDayOfWeek;
 		private String strLocation;
@@ -138,14 +173,25 @@ public class ScheduleListAdapter extends BaseAdapter {
 
 		private String strState;
 
-		public ScheduleListItem(String sn, String dow, String l, String t,
+		public ScheduleListItem(int id, String sn, String dow, String l, String t,
 				String s) {
+			
+			s_id = id;
+			
 			strScheduleName = sn;
 			strDayOfWeek = dow;
 			strLocation = l;
 			strTime = t;
 
 			strState = s;
+		}
+		
+		public int getsid() {
+			return s_id;
+		}
+
+		public void getsid(int id) {
+			s_id = id;
 		}
 
 		public String getScheduleName() {
@@ -191,12 +237,15 @@ public class ScheduleListAdapter extends BaseAdapter {
 	}
 
 	private class ScheduleListHolder {
+		
+		Button m_BtnDelete;
+		
 		TextView m_ScheduleName;
 		TextView m_DayOfWeek;
 		TextView m_Location;
 		TextView m_Time;
 		
-		Button m_Btn;
+		Button m_BtnOnOff;
 	}
 
 }
