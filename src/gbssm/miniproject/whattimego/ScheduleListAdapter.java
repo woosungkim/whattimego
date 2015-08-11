@@ -3,18 +3,19 @@ package gbssm.miniproject.whattimego;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class ScheduleListAdapter extends BaseAdapter {
-
+	
 	private DBManager dbManager;
 	private ArrayList<ScheduleListItem> scheduleList;
 
@@ -43,18 +44,21 @@ public class ScheduleListAdapter extends BaseAdapter {
 		final int pos = position;
 		final Context context = parent.getContext();
 		
-		Button btnDelete = null;
+		ImageView btnDelete = null;
 
 		TextView scheduleName = null;
 		TextView dayOfWeek = null;
 		TextView location = null;
 		TextView time = null;
 
-		Button btnOnOff = null;
+		RadioButton btnNo = null;
+		RadioButton btnVib = null;
+		RadioButton btnSound = null;
+		
 
 		ScheduleListHolder holder = null;
 		
-		dbManager = new DBManager( context, "ScheduleList.db", null, 2 );
+		dbManager = new DBManager( context, "ScheduleList.db", null, 3 );
 
 		// 리스트가 길어지면서 현재 화면에 보이지 않는 아이템은 convertView가 null인 상태로 들어 옴
 		if (convertView == null) {
@@ -65,7 +69,7 @@ public class ScheduleListAdapter extends BaseAdapter {
 					false);
 
 			// 뷰 가져오기
-			btnDelete = (Button) convertView.findViewById( R.id.btnDelete );
+			btnDelete = (ImageView) convertView.findViewById( R.id.btnDelete );
 			
 			scheduleName = (TextView) convertView
 					.findViewById(R.id.txtScheduleName);
@@ -73,7 +77,9 @@ public class ScheduleListAdapter extends BaseAdapter {
 			location = (TextView) convertView.findViewById(R.id.txtLocation);
 			time = (TextView) convertView.findViewById(R.id.txtTime);
 
-			btnOnOff = (Button) convertView.findViewById(R.id.btnMode);
+			btnNo = (RadioButton) convertView.findViewById( R.id.radioOff );
+			btnVib = (RadioButton) convertView.findViewById( R.id.radioVib );
+			btnSound = (RadioButton) convertView.findViewById( R.id.radioSound );
 
 			// 홀더 생성 및 tag로 등록
 			holder = new ScheduleListHolder();
@@ -85,7 +91,9 @@ public class ScheduleListAdapter extends BaseAdapter {
 			holder.m_Location = location;
 			holder.m_Time = time;
 			
-			holder.m_BtnOnOff = btnOnOff;
+			holder.m_BtnNo = btnNo;
+			holder.m_BtnVib = btnVib;
+			holder.m_BtnSound = btnSound;
 			
 			convertView.setTag(holder);
 		} else {
@@ -97,7 +105,10 @@ public class ScheduleListAdapter extends BaseAdapter {
 			location = holder.m_Location;
 			time = holder.m_Time;
 
-			btnOnOff = holder.m_BtnOnOff;
+			btnNo = holder.m_BtnNo;
+			btnVib = holder.m_BtnVib;
+			btnSound = holder.m_BtnSound;
+			
 		}
 
 		scheduleName.setText(scheduleList.get(position).getScheduleName());
@@ -105,13 +116,13 @@ public class ScheduleListAdapter extends BaseAdapter {
 		location.setText(scheduleList.get(position).getLocation());
 		time.setText(scheduleList.get(position).getTime());
 		
-		if ( scheduleList.get(position).getState().equals("ON") )
-			btnOnOff.setText( "ON" );
+		if ( scheduleList.get(position).getState().equals("sound") )
+			btnSound.setChecked(true);
+		else if ( scheduleList.get(position).getState().equals("vib") )
+			btnVib.setChecked(true);
 		else
-			btnOnOff.setText( "OFF" );
-		
-		
-		
+			btnNo.setChecked(true);
+
 		// delete 버튼 터치 이벤트
 		btnDelete.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -129,16 +140,6 @@ public class ScheduleListAdapter extends BaseAdapter {
 			}
 		});
 
-
-		// onoff 버튼 터치 이벤트
-		btnOnOff.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				// 터치 시 아이템 이름 출력
-				Toast.makeText(context,
-						scheduleList.get(pos).getScheduleName(),
-						Toast.LENGTH_SHORT).show();
-			}
-		});
 
 		// 리스트 아이템 터치 시 이벤트
 		convertView.setOnClickListener(new OnClickListener() {
@@ -238,14 +239,16 @@ public class ScheduleListAdapter extends BaseAdapter {
 
 	private class ScheduleListHolder {
 		
-		Button m_BtnDelete;
+		ImageView m_BtnDelete;
 		
 		TextView m_ScheduleName;
 		TextView m_DayOfWeek;
 		TextView m_Location;
 		TextView m_Time;
-		
-		Button m_BtnOnOff;
+
+		RadioButton m_BtnNo;
+		RadioButton m_BtnVib;
+		RadioButton m_BtnSound;
 	}
 
 }

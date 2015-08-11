@@ -5,5 +5,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_add">Add schedule</string>
+    
+    <color name="background">#32283C</color>
+    <color name="select">#FF007F</color>
 
 </resources>

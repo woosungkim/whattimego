@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_margin" >
+
+    <LinearLayout
+        android:id="@+id/layoutResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/txtLocationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장소 명"
+            android:textColor="#FFFFFF"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/txtLocationAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장소 주소"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txtLocationNewAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장소 도로명 주소"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+</RelativeLayout>
