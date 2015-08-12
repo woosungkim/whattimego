@@ -3,11 +3,13 @@ package gbssm.miniproject.whattimego;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,15 +32,14 @@ public class ScheduleAddActivity extends Activity {
 	private String destination = "";
 	private String destAddress = "";
 	private String dayOfWeek = "";
-	
-	
+
 	String selectedLoca = "";
 	String selectedAddr = "";
 	String selectedLati = "";
 	String selectedLongi = "";
 
 	static final int TIME_DIALOG_ID = 0;
-	
+
 	static final int DEST_SEARCH_CODE = 1111;
 
 	@Override
@@ -48,7 +49,7 @@ public class ScheduleAddActivity extends Activity {
 
 		// db 연결
 		dbManager = new DBManager(getApplicationContext(), "ScheduleList.db",
-				null, 3);
+				null, DBManager.DB_VERSION);
 
 		// 일정 이름
 		editName = (EditText) findViewById(R.id.editScheduleName);
@@ -67,6 +68,7 @@ public class ScheduleAddActivity extends Activity {
 		// 시간
 		txtTime = (TextView) findViewById(R.id.txtTime);
 
+
 		editDest.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -75,7 +77,8 @@ public class ScheduleAddActivity extends Activity {
 				Intent intentDestSearchActivity = new Intent(
 						ScheduleAddActivity.this, DestSearchActivity.class);
 
-				startActivityForResult(intentDestSearchActivity, DEST_SEARCH_CODE);
+				startActivityForResult(intentDestSearchActivity,
+						DEST_SEARCH_CODE);
 			}
 		});
 
@@ -121,35 +124,34 @@ public class ScheduleAddActivity extends Activity {
 
 				// DB에 저장하는 동작 수행
 				dbManager.insert("INSERT INTO SCHEDULE_LIST VALUES(null, '"
-						+ s_name + "', '" + selectedLoca + "', '" + selectedAddr + "', '"
-						+ s_time + "', '" + s_day + "', '" + repeat + "', '"
-						+ "sound" + "', '" + selectedLati + "', '" + selectedLongi + 
-						"');");
+						+ s_name + "', '" + selectedLoca + "', '"
+						+ selectedAddr + "', '" + s_time + "', '" + s_day
+						+ "', '" + repeat + "', '" + "sound" + "', '"
+						+ selectedLati + "', '" + selectedLongi + "');");
 
 				finish();
 			}
 		});
 	}
-	
-	protected void onActivityResult( int requestCode, int resultCode, Intent data ) {
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
-		if (resultCode == RESULT_OK)
-		{
-			if ( (requestCode == DEST_SEARCH_CODE) )
-			{
-				Log.d( "Receive Test", data.getStringExtra("locationName") + "  " + 
-										data.getStringExtra("address") + "  " + 
-										data.getStringExtra("latitude") + "  " + 
-										data.getStringExtra("longitude") );
-				
+
+		if (resultCode == RESULT_OK) {
+			if ((requestCode == DEST_SEARCH_CODE)) {
+				Log.d("Receive Test",
+						data.getStringExtra("locationName") + "  "
+								+ data.getStringExtra("address") + "  "
+								+ data.getStringExtra("latitude") + "  "
+								+ data.getStringExtra("longitude"));
+
 				selectedLoca = data.getStringExtra("locationName");
 				selectedAddr = data.getStringExtra("address");
 				selectedLati = data.getStringExtra("latitude");
 				selectedLongi = data.getStringExtra("longitude");
-				
-				editDest.setText( selectedLoca + " (" + selectedAddr + ")" );
-				
+
+				editDest.setText(selectedLoca + " (" + selectedAddr + ")");
+
 			}
 		}
 	}
@@ -176,7 +178,7 @@ public class ScheduleAddActivity extends Activity {
 			// TODO Auto-generated method stub
 			hour = hourOfDay;
 			minute = min;
-			
+
 			updateDisplay();
 		}
 	};

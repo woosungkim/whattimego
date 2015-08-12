@@ -58,7 +58,7 @@ public class ScheduleListAdapter extends BaseAdapter {
 
 		ScheduleListHolder holder = null;
 		
-		dbManager = new DBManager( context, "ScheduleList.db", null, 3 );
+		dbManager = new DBManager( context, "ScheduleList.db", null, DBManager.DB_VERSION );
 
 		// 리스트가 길어지면서 현재 화면에 보이지 않는 아이템은 convertView가 null인 상태로 들어 옴
 		if (convertView == null) {

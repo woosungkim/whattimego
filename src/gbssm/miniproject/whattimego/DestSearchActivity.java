@@ -52,7 +52,7 @@ public class DestSearchActivity extends Activity implements OnClickListener,
 
 	// 선택 완료
 	private ImageView btnSelect;
-	
+
 	private String location = "";
 	private String address = "";
 	private String lati = "";
@@ -96,16 +96,16 @@ public class DestSearchActivity extends Activity implements OnClickListener,
 			break;
 
 		case R.id.btnSelect:
-			
+
 			Intent intent = getIntent();
-			
-			intent.putExtra( "locationName", location );
-			intent.putExtra( "address", address );
-			intent.putExtra( "latitude", lati );
-			intent.putExtra( "longitude", longi );
-			
-			setResult( RESULT_OK, intent );
-			
+
+			intent.putExtra("locationName", location);
+			intent.putExtra("address", address);
+			intent.putExtra("latitude", lati);
+			intent.putExtra("longitude", longi);
+
+			setResult(RESULT_OK, intent);
+
 			finish();
 
 			break;
@@ -131,10 +131,14 @@ public class DestSearchActivity extends Activity implements OnClickListener,
 				+ ((ResultListItem) resultAdapter.getItem(position))
 						.getAddress() + ")");
 		// 선택 된 장소로 변수 교체
-		lati = ((ResultListItem) resultAdapter.getItem(position)).getLatitude() + "";
-		longi = ((ResultListItem) resultAdapter.getItem(position)).getLongitude() + "";
-		location = ((ResultListItem) resultAdapter.getItem(position)).getLocationName();
-		address = ((ResultListItem) resultAdapter.getItem(position)).getAddress();
+		lati = ((ResultListItem) resultAdapter.getItem(position)).getLatitude()
+				+ "";
+		longi = ((ResultListItem) resultAdapter.getItem(position))
+				.getLongitude() + "";
+		location = ((ResultListItem) resultAdapter.getItem(position))
+				.getLocationName();
+		address = ((ResultListItem) resultAdapter.getItem(position))
+				.getAddress();
 	}
 
 	class SendMessageHandler extends Handler {
@@ -164,7 +168,7 @@ public class DestSearchActivity extends Activity implements OnClickListener,
 					Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.",
 							Toast.LENGTH_SHORT).show();
 				} else {
-					for (MapItem item : resultList) {
+					for (MapItem item : resultList) { 
 						/*
 						 * Log.d("item", item.title + "  " + item.imageUrl +
 						 * "  " + item.address + "  " + item.newAddress + "  " +
@@ -192,7 +196,7 @@ public class DestSearchActivity extends Activity implements OnClickListener,
 
 						mapView.addPOIItem(marker);
 					}
-					//mapView.selectPOIItem(mapView.findPOIItemByTag(0), true);
+					// mapView.selectPOIItem(mapView.findPOIItemByTag(0), true);
 
 					break;
 				}
@@ -238,7 +242,7 @@ public class DestSearchActivity extends Activity implements OnClickListener,
 						mapView.removeAllPOIItems(); // 기존 검색 결과 삭제
 
 						Log.d("search", "onSuccess");
-						
+
 						// 메시지 얻어오기
 						Message msg = m_MainHandler.obtainMessage();
 

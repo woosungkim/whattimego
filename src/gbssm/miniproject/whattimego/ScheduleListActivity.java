@@ -24,7 +24,7 @@ public class ScheduleListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_schedulelist);   
 		
-		dbManager = new DBManager( getApplicationContext(), "ScheduleList.db", null, 3 );
+		dbManager = new DBManager( getApplicationContext(), "ScheduleList.db", null, DBManager.DB_VERSION );
 
 		scheduleListView = (ListView) findViewById( R.id.schedulelistview );
 		
@@ -65,7 +65,7 @@ public class ScheduleListActivity extends Activity {
 							cursor.getString(7) + " " + 
 							cursor.getString(8) + " " + 
 							cursor.getString(9) );
-			;
+			
 			String yoil = "";
 			String dbYoil = cursor.getString(5);
 			if ( cursor.getString(6).equals("yes") ) yoil += "นÝบน) ";

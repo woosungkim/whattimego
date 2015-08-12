@@ -43,12 +43,14 @@ public final class R {
         public static final int vibselector=0x7f02000d;
     }
     public static final class id {
-        public static final int action_add=0x7f090022;
+        public static final int action_add=0x7f090025;
         public static final int btnAdd=0x7f090014;
-        public static final int btnDelete=0x7f090021;
+        public static final int btnDelete=0x7f090024;
+        public static final int btnEnd=0x7f090018;
         public static final int btnOk=0x7f090012;
         public static final int btnSearch=0x7f090002;
         public static final int btnSelect=0x7f090004;
+        public static final int btnStart=0x7f090017;
         public static final int checkFri=0x7f09000e;
         public static final int checkMon=0x7f09000a;
         public static final int checkSat=0x7f09000f;
@@ -60,22 +62,23 @@ public final class R {
         public static final int editDestWord=0x7f090001;
         public static final int editDestination=0x7f090008;
         public static final int editScheduleName=0x7f090007;
-        public static final int layoutResult=0x7f090016;
+        public static final int layoutResult=0x7f090019;
         public static final int layout_page=0x7f090015;
         public static final int map_view=0x7f090005;
-        public static final int radioOff=0x7f09001e;
-        public static final int radioSound=0x7f090020;
-        public static final int radioVib=0x7f09001f;
+        public static final int radioOff=0x7f090021;
+        public static final int radioSound=0x7f090023;
+        public static final int radioVib=0x7f090022;
         public static final int resultlistview=0x7f090006;
         public static final int schedulelistview=0x7f090013;
         public static final int search_view=0x7f090000;
-        public static final int switchLayout=0x7f09001d;
-        public static final int txtDayOfWeek=0x7f09001b;
-        public static final int txtLocation=0x7f09001c;
-        public static final int txtLocationAddress=0x7f090018;
-        public static final int txtLocationName=0x7f090017;
-        public static final int txtLocationNewAddress=0x7f090019;
-        public static final int txtScheduleName=0x7f09001a;
+        public static final int switchLayout=0x7f090020;
+        public static final int textView1=0x7f090016;
+        public static final int txtDayOfWeek=0x7f09001e;
+        public static final int txtLocation=0x7f09001f;
+        public static final int txtLocationAddress=0x7f09001b;
+        public static final int txtLocationName=0x7f09001a;
+        public static final int txtLocationNewAddress=0x7f09001c;
+        public static final int txtScheduleName=0x7f09001d;
         public static final int txtSelectedLocation=0x7f090003;
         public static final int txtTime=0x7f090011;
     }

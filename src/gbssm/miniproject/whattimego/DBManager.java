@@ -10,6 +10,8 @@ import android.util.Log;
 
 public class DBManager extends SQLiteOpenHelper {
 
+	public static int DB_VERSION = 4;
+	
 	public DBManager(Context context, String name, CursorFactory factory,
 			int version) {
 		super(context, name, factory, version);
@@ -19,7 +21,7 @@ public class DBManager extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
 		// 새 테이블 생성
-		db.execSQL("CREATE TABLE SCHEDULE_LIST( s_id INTEGER PRIMARY KEY AUTOINCREMENT, s_name TEXT, s_dest TEXT, s_addr TEXT, s_time TEXT, s_day TEXT, repeat TEXT, onoff TEXT);");
+		db.execSQL("CREATE TABLE SCHEDULE_LIST( s_id INTEGER PRIMARY KEY AUTOINCREMENT, s_name TEXT, s_dest TEXT, s_addr TEXT, s_time TEXT, s_day TEXT, repeat TEXT, onoff TEXT, lati TEXT, longi TEXT);");
 	}
 
 	@Override
@@ -41,6 +43,19 @@ public class DBManager extends SQLiteOpenHelper {
 			break;
 
 		case 2:
+			try {
+				db.beginTransaction();
+				db.execSQL("ALTER TABLE SCHEDULE_LIST ADD COLUMN lati TEXT DEFAULT '0'");
+				db.execSQL("ALTER TABLE SCHEDULE_LIST ADD COLUMN longi TEXT DEFAULT '0'");
+				db.setTransactionSuccessful();
+			} catch (IllegalStateException e) {
+				Log.e("DB", "err");
+			} finally {
+				db.endTransaction();
+			}
+			break;
+			
+		case 3:
 			try {
 				db.beginTransaction();
 				db.execSQL("ALTER TABLE SCHEDULE_LIST ADD COLUMN lati TEXT DEFAULT '0'");
