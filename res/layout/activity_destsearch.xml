@@ -17,7 +17,8 @@
             android:id="@+id/editDestWord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="검색 할 장소를 입력하세요" />
+            android:hint="검색 할 장소를 입력하세요"
+            android:singleLine="true" />
 
         <Button
             android:id="@+id/btnSearch"
@@ -50,11 +51,10 @@
     
     <ImageView
         android:id="@+id/btnSelect"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
         android:src="@drawable/img_location" />
     
 

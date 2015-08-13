@@ -89,10 +89,10 @@ public class DBManager extends SQLiteOpenHelper {
 	}
 
 	public Cursor select(String _query) {
-		SQLiteDatabase db = getWritableDatabase();
+		SQLiteDatabase db = getReadableDatabase();
 
 		Cursor cursor = db.rawQuery(_query, null);
-
+		
 		return cursor;
 	}
 

@@ -8,83 +8,86 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class ScheduleListActivity extends Activity {
+public class ScheduleListActivity extends Activity implements OnClickListener {
 	private DBManager dbManager;
-	
+
 	private ListView scheduleListView;
 	private ScheduleListAdapter scheduleAdapter;
-	
+
 	private ImageView btnPlus;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_schedulelist);   
-		
-		dbManager = new DBManager( getApplicationContext(), "ScheduleList.db", null, DBManager.DB_VERSION );
+		setContentView(R.layout.activity_schedulelist);
 
-		scheduleListView = (ListView) findViewById( R.id.schedulelistview );
-		
-		btnPlus = (ImageView) findViewById( R.id.btnAdd );
-		
-		btnPlus.setOnClickListener( new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intentScheduleAddActivity = new Intent(ScheduleListActivity.this, ScheduleAddActivity.class );
-				
-				startActivity(intentScheduleAddActivity);
-			}
-		});
-		//dbManager.insert( "INSERT INTO SCHEDULE_LIST VALUES(null, '" + "학교 수업3" + "', '" + "국민대학교" + "', '" + "성북구 어딘가" + "', '" + "10:30" + "', '" + "1234" + "', '" + "yes" + "', '" + "on" + "');");	
+		dbManager = new DBManager(getApplicationContext(), "ScheduleList.db",
+				null, DBManager.DB_VERSION);
+
+		scheduleListView = (ListView) findViewById(R.id.schedulelistview);
+
+		btnPlus = (ImageView) findViewById(R.id.btnAdd);
+		btnPlus.setOnClickListener(this);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
+
 		scheduleAdapter = new ScheduleListAdapter();
-		
-		scheduleListView.setAdapter( scheduleAdapter );
-		
-		Cursor cursor = dbManager.select( "SELECT * from SCHEDULE_LIST" );
-		
-		while(cursor.moveToNext()) {
-			Log.d("DBList", cursor.getInt(0) + " " +
-							cursor.getString(1) + " " + 
-							cursor.getString(2) + " " + 
-							cursor.getString(3) + " " + 
-							cursor.getString(4) + " " + 
-							cursor.getString(5) + " " + 
-							cursor.getString(6) + " " + 
-							cursor.getString(7) + " " + 
-							cursor.getString(8) + " " + 
-							cursor.getString(9) );
-			
-			String yoil = "";
-			String dbYoil = cursor.getString(5);
-			if ( cursor.getString(6).equals("yes") ) yoil += "반복) ";
-			
-			if ( dbYoil.equals("1234567") )
-				yoil += "매 일";
-			else
-			{
-				if ( dbYoil.contains("1") ) yoil += "월 ";
-				if ( dbYoil.contains("2") ) yoil += "화 ";
-				if ( dbYoil.contains("3") ) yoil += "수 ";
-				if ( dbYoil.contains("4") ) yoil += "목 ";
-				if ( dbYoil.contains("5") ) yoil += "금 ";
-				if ( dbYoil.contains("6") ) yoil += "토 ";
-				if ( dbYoil.contains("7") ) yoil += "일 ";
+
+		scheduleListView.setAdapter(scheduleAdapter);
+
+		Cursor cursor = dbManager.select("SELECT * from SCHEDULE_LIST");
+
+		while (cursor.moveToNext()) {
+			Log.d("DBList", cursor.getInt(0) + " " + cursor.getString(1) + " "
+					+ cursor.getString(2) + " " + cursor.getString(3) + " "
+					+ cursor.getString(4) + " " + cursor.getString(5) + " "
+					+ cursor.getString(6) + " " + cursor.getString(7) + " "
+					+ cursor.getString(8) + " " + cursor.getString(9));
+
+			int nTime = Integer.parseInt(cursor.getString(4));
+			int hour = nTime / 60;
+			int minute = nTime % 60;
+
+			String scheduleTime = "";
+			if (hour < 12) {
+				scheduleTime += "오전 ";
+			} else {
+				scheduleTime += "오후 ";
+				if (hour > 12)
+					hour -= 12;
 			}
-			scheduleAdapter.add( new ScheduleListItem( cursor.getInt(0), cursor.getString(1), yoil, cursor.getString(2), cursor.getString(4), cursor.getString(7)));
-        }
-		
+			if ( hour < 10 )
+				scheduleTime += "0";
+			scheduleTime += hour + ":";
+			if ( minute < 10 )
+				scheduleTime += "0";
+			scheduleTime += (minute+"");
+
+			scheduleAdapter.add(new ScheduleListItem(cursor.getInt(0), cursor
+					.getString(1), cursor.getString(5), cursor.getString(2),
+					scheduleTime, cursor.getString(6), cursor.getString(7)));
+		}
+
 	}
-	
+
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btnAdd:
+			Intent intentScheduleAddActivity = new Intent(
+					ScheduleListActivity.this, ScheduleAddActivity.class);
+
+			startActivity(intentScheduleAddActivity);
+			break;
+		}
+	}
+
 }

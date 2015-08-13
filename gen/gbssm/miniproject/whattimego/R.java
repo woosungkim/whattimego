@@ -11,8 +11,8 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int background=0x7f060000;
-        public static final int select=0x7f060001;
+        public static final int background=0x7f070000;
+        public static final int select=0x7f070001;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -22,83 +22,118 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_margin=0x7f040002;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_margin=0x7f050002;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int basket=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int img_location=0x7f020002;
-        public static final int img_plus=0x7f020003;
-        public static final int img_scheduleadd=0x7f020004;
-        public static final int img_write=0x7f020005;
-        public static final int listselector=0x7f020006;
-        public static final int no=0x7f020007;
-        public static final int noselector=0x7f020008;
-        public static final int select=0x7f020009;
-        public static final int sound=0x7f02000a;
-        public static final int soundselector=0x7f02000b;
-        public static final int vib=0x7f02000c;
-        public static final int vibselector=0x7f02000d;
+        public static final int fri_select=0x7f020000;
+        public static final int fri_selector=0x7f020001;
+        public static final int fri_unselect=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int img_location=0x7f020004;
+        public static final int img_plus=0x7f020005;
+        public static final int img_scheduleadd=0x7f020006;
+        public static final int img_write=0x7f020007;
+        public static final int listselector=0x7f020008;
+        public static final int mon_select=0x7f020009;
+        public static final int mon_selector=0x7f02000a;
+        public static final int mon_unselect=0x7f02000b;
+        public static final int off_select=0x7f02000c;
+        public static final int off_selector=0x7f02000d;
+        public static final int off_unselect=0x7f02000e;
+        public static final int off_unselected=0x7f02000f;
+        public static final int remove=0x7f020010;
+        public static final int repeat_select=0x7f020011;
+        public static final int repeat_selector=0x7f020012;
+        public static final int repeat_unselect=0x7f020013;
+        public static final int sat_select=0x7f020014;
+        public static final int sat_selector=0x7f020015;
+        public static final int sat_unselect=0x7f020016;
+        public static final int sound_select=0x7f020017;
+        public static final int sound_selector=0x7f020018;
+        public static final int sound_unselect=0x7f020019;
+        public static final int sun_select=0x7f02001a;
+        public static final int sun_selector=0x7f02001b;
+        public static final int sun_unselect=0x7f02001c;
+        public static final int thur_select=0x7f02001d;
+        public static final int thur_selector=0x7f02001e;
+        public static final int thur_unselect=0x7f02001f;
+        public static final int tues_select=0x7f020020;
+        public static final int tues_selector=0x7f020021;
+        public static final int tues_unselect=0x7f020022;
+        public static final int vibration_select=0x7f020023;
+        public static final int vibration_selector=0x7f020024;
+        public static final int vibration_unselect=0x7f020025;
+        public static final int wedn_select=0x7f020026;
+        public static final int wedn_selector=0x7f020027;
+        public static final int wedn_unselect=0x7f020028;
     }
     public static final class id {
-        public static final int action_add=0x7f090025;
-        public static final int btnAdd=0x7f090014;
-        public static final int btnDelete=0x7f090024;
-        public static final int btnEnd=0x7f090018;
-        public static final int btnOk=0x7f090012;
-        public static final int btnSearch=0x7f090002;
-        public static final int btnSelect=0x7f090004;
-        public static final int btnStart=0x7f090017;
-        public static final int checkFri=0x7f09000e;
-        public static final int checkMon=0x7f09000a;
-        public static final int checkSat=0x7f09000f;
-        public static final int checkSun=0x7f090010;
-        public static final int checkThur=0x7f09000d;
-        public static final int checkTues=0x7f09000b;
-        public static final int checkWedn=0x7f09000c;
-        public static final int checkboxRepeat=0x7f090009;
-        public static final int editDestWord=0x7f090001;
-        public static final int editDestination=0x7f090008;
-        public static final int editScheduleName=0x7f090007;
-        public static final int layoutResult=0x7f090019;
-        public static final int layout_page=0x7f090015;
-        public static final int map_view=0x7f090005;
-        public static final int radioOff=0x7f090021;
-        public static final int radioSound=0x7f090023;
-        public static final int radioVib=0x7f090022;
-        public static final int resultlistview=0x7f090006;
-        public static final int schedulelistview=0x7f090013;
-        public static final int search_view=0x7f090000;
-        public static final int switchLayout=0x7f090020;
-        public static final int textView1=0x7f090016;
-        public static final int txtDayOfWeek=0x7f09001e;
-        public static final int txtLocation=0x7f09001f;
-        public static final int txtLocationAddress=0x7f09001b;
-        public static final int txtLocationName=0x7f09001a;
-        public static final int txtLocationNewAddress=0x7f09001c;
-        public static final int txtScheduleName=0x7f09001d;
-        public static final int txtSelectedLocation=0x7f090003;
-        public static final int txtTime=0x7f090011;
+        public static final int action_add=0x7f0a0029;
+        public static final int addRadioOff=0x7f0a000e;
+        public static final int addRadioSound=0x7f0a0010;
+        public static final int addRadioVib=0x7f0a000f;
+        public static final int addlayout=0x7f0a000b;
+        public static final int btnAdd=0x7f0a001b;
+        public static final int btnAlarmOff=0x7f0a0003;
+        public static final int btnDelete=0x7f0a0028;
+        public static final int btnOk=0x7f0a0019;
+        public static final int btnSearch=0x7f0a0006;
+        public static final int btnSelect=0x7f0a0008;
+        public static final int checkFri=0x7f0a0017;
+        public static final int checkMon=0x7f0a0013;
+        public static final int checkRepeat=0x7f0a0023;
+        public static final int checkSat=0x7f0a0018;
+        public static final int checkSun=0x7f0a0012;
+        public static final int checkThur=0x7f0a0016;
+        public static final int checkTues=0x7f0a0014;
+        public static final int checkWedn=0x7f0a0015;
+        public static final int checkboxRepeat=0x7f0a0011;
+        public static final int editDestWord=0x7f0a0005;
+        public static final int editDestination=0x7f0a000d;
+        public static final int editScheduleName=0x7f0a000c;
+        public static final int layoutResult=0x7f0a001d;
+        public static final int layout_page=0x7f0a0000;
+        public static final int map_view=0x7f0a0009;
+        public static final int radioOff=0x7f0a0025;
+        public static final int radioSound=0x7f0a0027;
+        public static final int radioVib=0x7f0a0026;
+        public static final int resultlistview=0x7f0a000a;
+        public static final int schedulelistview=0x7f0a001a;
+        public static final int search_view=0x7f0a0004;
+        public static final int switchLayout=0x7f0a0024;
+        public static final int textView1=0x7f0a001c;
+        public static final int txtLocation=0x7f0a0022;
+        public static final int txtLocationAddress=0x7f0a001f;
+        public static final int txtLocationName=0x7f0a001e;
+        public static final int txtLocationNewAddress=0x7f0a0020;
+        public static final int txtPath=0x7f0a0002;
+        public static final int txtScheduleName=0x7f0a0021;
+        public static final int txtSelectedLocation=0x7f0a0007;
+        public static final int txtTime=0x7f0a0001;
     }
     public static final class layout {
-        public static final int activity_destsearch=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_scheduleadd=0x7f030002;
-        public static final int activity_schedulelist=0x7f030003;
-        public static final int activity_title=0x7f030004;
-        public static final int resultlistitem=0x7f030005;
-        public static final int schedulelistitem=0x7f030006;
+        public static final int activity_alarm=0x7f030000;
+        public static final int activity_destsearch=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_scheduleadd=0x7f030003;
+        public static final int activity_schedulelist=0x7f030004;
+        public static final int activity_title=0x7f030005;
+        public static final int resultlistitem=0x7f030006;
+        public static final int schedulelistitem=0x7f030007;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int main=0x7f090000;
+    }
+    public static final class raw {
+        public static final int alarmsong=0x7f040000;
     }
     public static final class string {
-        public static final int action_add=0x7f050003;
-        public static final int action_settings=0x7f050002;
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050001;
+        public static final int action_add=0x7f060003;
+        public static final int action_settings=0x7f060002;
+        public static final int app_name=0x7f060000;
+        public static final int hello_world=0x7f060001;
     }
     public static final class style {
         /** 
@@ -122,10 +157,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f080001;
     }
 }

@@ -17,25 +17,16 @@
             android:id="@+id/txtScheduleName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_margin"
             android:text="일정 이름"
             android:textColor="#AAAAAA"
-            android:textSize="30dp" />
+            android:textSize="35dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_margin"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginBottom="@dimen/activity_margin"
             android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/txtDayOfWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:text="요일"
-                android:textColor="#FFFFFF"
-                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/txtLocation"
@@ -54,6 +45,68 @@
                 android:textColor="#FFFFFF"
                 android:textSize="15dp" />
         </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkRepeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="  반복" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/checkSun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="45dp"
+                android:button="@drawable/sun_selector" />
+
+            <CheckBox
+                android:id="@+id/checkMon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="45dp"
+                android:button="@drawable/mon_selector" />
+
+            <CheckBox
+                android:id="@+id/checkTues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="45dp"
+                android:button="@drawable/tues_selector" />
+
+            <CheckBox
+                android:id="@+id/checkWedn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="45dp"
+                android:button="@drawable/wedn_selector" />
+
+            <CheckBox
+                android:id="@+id/checkThur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="45dp"
+                android:button="@drawable/thur_selector" />
+
+            <CheckBox
+                android:id="@+id/checkFri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="45dp"
+                android:button="@drawable/fri_selector" />
+
+            <CheckBox
+                android:id="@+id/checkSat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/sat_selector" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -61,6 +114,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="15dp"
         android:orientation="vertical" >
 
         <RadioGroup
@@ -73,30 +128,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:button="@drawable/noselector" />
+                android:button="@drawable/off_selector" />
 
             <RadioButton
                 android:id="@+id/radioVib"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:button="@drawable/vibselector" />
+                android:button="@drawable/vibration_selector" />
 
             <RadioButton
                 android:id="@+id/radioSound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/soundselector" />
+                android:button="@drawable/sound_selector" />
         </RadioGroup>
     </LinearLayout>
-    
-     <ImageView
-            android:id="@+id/btnDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/switchLayout"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/basket" />
+
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/remove" />
 
 </RelativeLayout>

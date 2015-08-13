@@ -17,26 +17,14 @@
         android:layout_centerVertical="true"
         android:text="몇 시에 나가지?"
         android:textColor="#FFFFFF"
-        android:textSize="40dp" />
-
+        android:textSize="50dp" />
     
-    
-    <Button
-        android:id="@+id/btnStart"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Copyright 2015. GBSSM All rights reserved."
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="시작" />
-    
-    <Button
-        android:id="@+id/btnEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="종료" />
+        android:layout_alignParentRight="true" />
 
-    
 
 </RelativeLayout>

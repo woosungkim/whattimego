@@ -13,21 +13,28 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class ScheduleAddActivity extends Activity {
 	private DBManager dbManager;
+	
+	private RelativeLayout addpage;
 
 	private EditText editName;
 	private TextView editDest;
+	
+	private RadioButton radioOff, radioVib, radioSound;
 	private CheckBox checkRepeat;
 	private CheckBox btnMon, btnTues, btnWedn, btnThur, btnFri, btnSat, btnSun;
 	private TextView txtTime;
 
 	private ImageView btnOk;
 
-	private int hour, minute;
+	private int hour = 0, minute = 0;
 	private String scheduleName = "";
 	private String destination = "";
 	private String destAddress = "";
@@ -50,24 +57,44 @@ public class ScheduleAddActivity extends Activity {
 		// db 연결
 		dbManager = new DBManager(getApplicationContext(), "ScheduleList.db",
 				null, DBManager.DB_VERSION);
+		
+		addpage = (RelativeLayout) findViewById( R.id.addlayout );
 
 		// 일정 이름
 		editName = (EditText) findViewById(R.id.editScheduleName);
 		// 목적지
 		editDest = (TextView) findViewById(R.id.editDestination);
+		// 울림 여부
+		radioOff = (RadioButton) findViewById ( R.id.addRadioOff );
+		radioVib = (RadioButton) findViewById ( R.id.addRadioVib );
+		radioSound = (RadioButton) findViewById ( R.id.addRadioSound );
 		// 반복여부
 		checkRepeat = (CheckBox) findViewById(R.id.checkboxRepeat);
 		// 요일 선택
+		btnSun = (CheckBox) findViewById(R.id.checkSun);
 		btnMon = (CheckBox) findViewById(R.id.checkMon);
 		btnTues = (CheckBox) findViewById(R.id.checkTues);
 		btnWedn = (CheckBox) findViewById(R.id.checkWedn);
 		btnThur = (CheckBox) findViewById(R.id.checkThur);
 		btnFri = (CheckBox) findViewById(R.id.checkFri);
 		btnSat = (CheckBox) findViewById(R.id.checkSat);
-		btnSun = (CheckBox) findViewById(R.id.checkSun);
 		// 시간
 		txtTime = (TextView) findViewById(R.id.txtTime);
+		
+		// 첫 선택은 소리
+		radioSound.setChecked( true );
 
+		addpage.setOnClickListener( new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// hide keyboard
+				InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				mInputMethodManager.hideSoftInputFromWindow(
+						editName.getWindowToken(), 0);
+			}
+		});
 
 		editDest.setOnClickListener(new OnClickListener() {
 
@@ -100,36 +127,62 @@ public class ScheduleAddActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String s_name = editName.getText().toString();
-				String s_time = txtTime.getText().toString();
+				int compu_time = hour * 60 + minute;
+				String s_time = compu_time + "";
 				String s_day = "";
-				if (btnMon.isChecked())
-					s_day = s_day + "1";
-				if (btnTues.isChecked())
-					s_day = s_day + "2";
-				if (btnWedn.isChecked())
-					s_day = s_day + "3";
-				if (btnThur.isChecked())
-					s_day = s_day + "4";
-				if (btnFri.isChecked())
-					s_day = s_day + "5";
-				if (btnSat.isChecked())
-					s_day = s_day + "6";
 				if (btnSun.isChecked())
+					s_day = s_day + "1";
+				if (btnMon.isChecked())
+					s_day = s_day + "2";
+				if (btnTues.isChecked())
+					s_day = s_day + "3";
+				if (btnWedn.isChecked())
+					s_day = s_day + "4";
+				if (btnThur.isChecked())
+					s_day = s_day + "5";
+				if (btnFri.isChecked())
+					s_day = s_day + "6";
+				if (btnSat.isChecked())
 					s_day = s_day + "7";
+				
+				String state = "";
+				if ( radioOff.isChecked() )
+					state = "off";
+				else if ( radioVib.isChecked() )
+					state = "vib";
+				else
+					state = "sound";
+					
+
 				String repeat = "";
 				if (checkRepeat.isChecked())
 					repeat = repeat + "yes";
 				else
 					repeat = repeat + "no";
+				
+				
 
-				// DB에 저장하는 동작 수행
-				dbManager.insert("INSERT INTO SCHEDULE_LIST VALUES(null, '"
-						+ s_name + "', '" + selectedLoca + "', '"
-						+ selectedAddr + "', '" + s_time + "', '" + s_day
-						+ "', '" + repeat + "', '" + "sound" + "', '"
-						+ selectedLati + "', '" + selectedLongi + "');");
+				// error 처리
+				if (s_name.equals("")) {
+					Toast.makeText(getApplicationContext(), "일정 이름을 입력하세요!",
+							Toast.LENGTH_SHORT).show();
 
-				finish();
+				} else if (selectedLoca.equals("")) {
+					Toast.makeText(getApplicationContext(), "목적지를 선택하세요!",
+							Toast.LENGTH_SHORT).show();
+				} else if (s_time.equals("0")) {
+					Toast.makeText(getApplicationContext(), "약속 시간을 설정하세요!",
+							Toast.LENGTH_SHORT).show();
+				} else {
+					// DB에 저장하는 동작 수행
+					dbManager.insert("INSERT INTO SCHEDULE_LIST VALUES(null, '"
+							+ s_name + "', '" + selectedLoca + "', '"
+							+ selectedAddr + "', '" + s_time + "', '" + s_day
+							+ "', '" + repeat + "', '" + state + "', '"
+							+ selectedLati + "', '" + selectedLongi + "');");
+
+					finish();
+				}
 			}
 		});
 	}

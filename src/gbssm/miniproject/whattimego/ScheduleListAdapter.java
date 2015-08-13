@@ -3,12 +3,13 @@ package gbssm.miniproject.whattimego;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -47,13 +48,21 @@ public class ScheduleListAdapter extends BaseAdapter {
 		ImageView btnDelete = null;
 
 		TextView scheduleName = null;
-		TextView dayOfWeek = null;
 		TextView location = null;
 		TextView time = null;
 
-		RadioButton btnNo = null;
+		RadioButton btnOff = null;
 		RadioButton btnVib = null;
 		RadioButton btnSound = null;
+		
+		CheckBox checkRepeat = null;
+		CheckBox checkSun = null;
+		CheckBox checkMon = null;
+		CheckBox checkTues = null;
+		CheckBox checkWedn = null;
+		CheckBox checkThur = null;
+		CheckBox checkFri = null;
+		CheckBox checkSat = null;
 		
 
 		ScheduleListHolder holder = null;
@@ -73,27 +82,44 @@ public class ScheduleListAdapter extends BaseAdapter {
 			
 			scheduleName = (TextView) convertView
 					.findViewById(R.id.txtScheduleName);
-			dayOfWeek = (TextView) convertView.findViewById(R.id.txtDayOfWeek);
 			location = (TextView) convertView.findViewById(R.id.txtLocation);
 			time = (TextView) convertView.findViewById(R.id.txtTime);
 
-			btnNo = (RadioButton) convertView.findViewById( R.id.radioOff );
+			btnOff = (RadioButton) convertView.findViewById( R.id.radioOff );
 			btnVib = (RadioButton) convertView.findViewById( R.id.radioVib );
 			btnSound = (RadioButton) convertView.findViewById( R.id.radioSound );
 
+			checkRepeat = (CheckBox) convertView.findViewById ( R.id.checkRepeat );
+			checkSun = (CheckBox) convertView.findViewById(R.id.checkSun);
+			checkMon = (CheckBox) convertView.findViewById(R.id.checkMon);
+			checkTues = (CheckBox) convertView.findViewById(R.id.checkTues);
+			checkWedn = (CheckBox) convertView.findViewById(R.id.checkWedn);
+			checkThur = (CheckBox) convertView.findViewById(R.id.checkThur);
+			checkFri = (CheckBox) convertView.findViewById(R.id.checkFri);
+			checkSat = (CheckBox) convertView.findViewById(R.id.checkSat);
+			
+			
 			// 홀더 생성 및 tag로 등록
 			holder = new ScheduleListHolder();
 			
 			holder.m_BtnDelete = btnDelete;
 			
 			holder.m_ScheduleName = scheduleName;
-			holder.m_DayOfWeek = dayOfWeek;
 			holder.m_Location = location;
 			holder.m_Time = time;
 			
-			holder.m_BtnNo = btnNo;
+			holder.m_BtnOff = btnOff;
 			holder.m_BtnVib = btnVib;
 			holder.m_BtnSound = btnSound;
+			
+			holder.m_checkRepeat = checkRepeat;
+			holder.m_checkSun = checkSun;
+			holder.m_checkMon = checkMon;
+			holder.m_checkTues = checkTues;
+			holder.m_checkWedn = checkWedn;
+			holder.m_checkThur = checkThur;
+			holder.m_checkFri = checkFri;
+			holder.m_checkSat = checkSat;
 			
 			convertView.setTag(holder);
 		} else {
@@ -101,27 +127,55 @@ public class ScheduleListAdapter extends BaseAdapter {
 			btnDelete = holder.m_BtnDelete;
 			
 			scheduleName = holder.m_ScheduleName;
-			dayOfWeek = holder.m_DayOfWeek;
 			location = holder.m_Location;
 			time = holder.m_Time;
 
-			btnNo = holder.m_BtnNo;
+			btnOff = holder.m_BtnOff;
 			btnVib = holder.m_BtnVib;
 			btnSound = holder.m_BtnSound;
 			
+			checkRepeat = holder.m_checkRepeat;
+			checkSun = holder.m_checkSun;
+			checkMon = holder.m_checkMon;
+			checkTues = holder.m_checkTues;
+			checkWedn = holder.m_checkWedn;
+			checkThur = holder.m_checkThur;
+			checkFri = holder.m_checkFri;
+			checkSat = holder.m_checkSat;
+			
 		}
-
-		scheduleName.setText(scheduleList.get(position).getScheduleName());
-		dayOfWeek.setText(scheduleList.get(position).getDayOfWeek());
-		location.setText(scheduleList.get(position).getLocation());
-		time.setText(scheduleList.get(position).getTime());
 		
 		if ( scheduleList.get(position).getState().equals("sound") )
 			btnSound.setChecked(true);
 		else if ( scheduleList.get(position).getState().equals("vib") )
 			btnVib.setChecked(true);
 		else
-			btnNo.setChecked(true);
+			btnOff.setChecked(true);
+		
+		if ( scheduleList.get(position).getRepeat().equals("yes"))
+			checkRepeat.setChecked( true );
+		
+		if (scheduleList.get(position).getDayOfWeek().contains("1"))
+			checkSun.setChecked(true);
+		if (scheduleList.get(position).getDayOfWeek().contains("2"))
+			checkMon.setChecked(true);
+		if (scheduleList.get(position).getDayOfWeek().contains("3"))
+			checkTues.setChecked(true);
+		if (scheduleList.get(position).getDayOfWeek().contains("4"))
+			checkWedn.setChecked(true);
+		if (scheduleList.get(position).getDayOfWeek().contains("5"))
+			checkThur.setChecked(true);
+		if (scheduleList.get(position).getDayOfWeek().contains("6"))
+			checkFri.setChecked(true);
+		if (scheduleList.get(position).getDayOfWeek().contains("7"))
+			checkSat.setChecked(true);
+
+		
+		scheduleName.setText(scheduleList.get(position).getScheduleName());
+		location.setText(scheduleList.get(position).getLocation());
+		time.setText(scheduleList.get(position).getTime());
+		
+		
 
 		// delete 버튼 터치 이벤트
 		btnDelete.setOnClickListener(new OnClickListener() {
@@ -139,17 +193,204 @@ public class ScheduleListAdapter extends BaseAdapter {
 						Toast.LENGTH_SHORT).show();
 			}
 		});
-
-
-		// 리스트 아이템 터치 시 이벤트
-		convertView.setOnClickListener(new OnClickListener() {
+		
+		
+		checkRepeat.setOnClickListener( new OnClickListener() {
+			
+			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "리스트 클릭 : " + pos + "  s_id : " + ((ScheduleListItem)getItem(pos)).getsid(),
-						Toast.LENGTH_SHORT).show();
+				// TODO Auto-generated method stub
+				int s_id = scheduleList.get(pos).getsid();
+				 
+				 if ( scheduleList.get(pos).getRepeat().equals("yes") )
+				 {
+					 scheduleList.get(pos).setRepeat("no");
+					 dbManager.update( "UPDATE SCHEDULE_LIST SET repeat = '" + "no" + "' WHERE s_id = " + s_id + ";");
+				 }
+				 else
+				 {
+					 scheduleList.get(pos).setRepeat("yes");
+					 dbManager.update( "UPDATE SCHEDULE_LIST SET repeat = '" + "yes" + "' WHERE s_id = " + s_id + ";");
+				 }
 			}
-
 		});
+		
+		btnOff.setOnClickListener( new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				int s_id = scheduleList.get(pos).getsid();
+				
+				scheduleList.get(pos).setState("off");
+				dbManager.update( "UPDATE SCHEDULE_LIST SET onoff = '" + "off" +"' " + "WHERE s_id = " + s_id + ";");
+			}
+		});
+		btnVib.setOnClickListener( new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				int s_id = scheduleList.get(pos).getsid();
+				
+				scheduleList.get(pos).setState("vib");
+				dbManager.update( "UPDATE SCHEDULE_LIST SET onoff = '" + "vib" +"' " + "WHERE s_id = " + s_id + ";");
+			}
+		});
+		btnSound.setOnClickListener( new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				int s_id = scheduleList.get(pos).getsid();
+				
+				scheduleList.get(pos).setState("sound");
+				dbManager.update( "UPDATE SCHEDULE_LIST SET onoff = '" + "sound" +"' " + "WHERE s_id = " + s_id + ";");
+			}
+		});
+		
+		
+		// 요일 클릭 이벤트
+		checkSun.setOnClickListener( new OnClickListener() {
+			public void onClick( View v ) {
+				String yoil = scheduleList.get(pos).getDayOfWeek();
+				int s_id = scheduleList.get(pos).getsid();
+				if (yoil.contains("1"))
+				{
+					yoil = yoil.replace("1", "");
+					scheduleList.get(pos).setDayOfWeek(yoil);
 
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+				else
+				{
+					yoil += "1";
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+			}
+		});
+		checkMon.setOnClickListener( new OnClickListener() {
+			public void onClick( View v ) {
+				String yoil = scheduleList.get(pos).getDayOfWeek();
+				int s_id = scheduleList.get(pos).getsid();
+				if (yoil.contains("2"))
+				{
+					yoil = yoil.replace("2", "");
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+				else
+				{
+					yoil += "2";
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+			}
+		});
+		checkTues.setOnClickListener( new OnClickListener() {
+			public void onClick( View v ) {
+				String yoil = scheduleList.get(pos).getDayOfWeek();
+				int s_id = scheduleList.get(pos).getsid();
+				if (yoil.contains("3"))
+				{
+					yoil = yoil.replace("3", "");
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+				else
+				{
+					yoil += "3";
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+			}
+		});
+		checkWedn.setOnClickListener( new OnClickListener() {
+			public void onClick( View v ) {
+				Log.d("checkSun", "Click");
+				String yoil = scheduleList.get(pos).getDayOfWeek();
+				int s_id = scheduleList.get(pos).getsid();
+				if (yoil.contains("4"))
+				{
+					yoil = yoil.replace("4", "");
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+				else
+				{
+					yoil += "4";
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+			}
+		});
+		checkThur.setOnClickListener( new OnClickListener() {
+			public void onClick( View v ) {
+				String yoil = scheduleList.get(pos).getDayOfWeek();
+				int s_id = scheduleList.get(pos).getsid();
+				if (yoil.contains("5"))
+				{
+					yoil = yoil.replace("5", "");
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+				else
+				{
+					yoil += "5";
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+			}
+		});
+		checkFri.setOnClickListener( new OnClickListener() {
+			public void onClick( View v ) {
+				String yoil = scheduleList.get(pos).getDayOfWeek();
+				int s_id = scheduleList.get(pos).getsid();
+				if (yoil.contains("6"))
+				{
+					yoil = yoil.replace("6", "");
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+				else
+				{
+					yoil += "6";
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+			}
+		});
+		checkSat.setOnClickListener( new OnClickListener() {
+			public void onClick( View v ) {
+				String yoil = scheduleList.get(pos).getDayOfWeek();
+				int s_id = scheduleList.get(pos).getsid();
+				if (yoil.contains("7"))
+				{
+					yoil = yoil.replace("7", "");
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+				else
+				{
+					yoil += "7";
+					scheduleList.get(pos).setDayOfWeek(yoil);
+
+					dbManager.update( "UPDATE SCHEDULE_LIST SET s_day = '" + yoil +"' " + "WHERE s_id = " + s_id + ";");
+				}
+			}
+		});
+		
+		
 		return convertView;
 	}
 
@@ -171,10 +412,11 @@ public class ScheduleListAdapter extends BaseAdapter {
 		private String strDayOfWeek;
 		private String strLocation;
 		private String strTime;
+		private String strRepeat;
 
 		private String strState;
 
-		public ScheduleListItem(int id, String sn, String dow, String l, String t,
+		public ScheduleListItem(int id, String sn, String dow, String l, String t, String r,
 				String s) {
 			
 			s_id = id;
@@ -184,6 +426,7 @@ public class ScheduleListAdapter extends BaseAdapter {
 			strLocation = l;
 			strTime = t;
 
+			strRepeat = r;
 			strState = s;
 		}
 		
@@ -227,6 +470,14 @@ public class ScheduleListAdapter extends BaseAdapter {
 			strTime = t;
 		}
 
+		public String getRepeat() {
+			return strRepeat;
+		}
+
+		public void setRepeat(String r) {
+			strRepeat = r;
+		}
+		
 		public String getState() {
 			return strState;
 		}
@@ -246,9 +497,18 @@ public class ScheduleListAdapter extends BaseAdapter {
 		TextView m_Location;
 		TextView m_Time;
 
-		RadioButton m_BtnNo;
+		RadioButton m_BtnOff;
 		RadioButton m_BtnVib;
 		RadioButton m_BtnSound;
+		
+		CheckBox m_checkRepeat;
+		CheckBox m_checkSun;
+		CheckBox m_checkMon;
+		CheckBox m_checkTues;
+		CheckBox m_checkWedn;
+		CheckBox m_checkThur;
+		CheckBox m_checkFri;
+		CheckBox m_checkSat;
 	}
 
 }

@@ -6,7 +6,8 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin" >
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/addlayout" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,17 +21,44 @@
             android:layout_margin="@dimen/activity_margin"
             android:hint="일정 이름을 입력하세요"
             android:padding="@dimen/activity_margin"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/editDestination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_margin"
-            android:hint="목적지를 입력하세요"
+            android:hint="목적지를 선택하세요"
             android:padding="@dimen/activity_margin"
-            android:textSize="20dp"
-            android:textColor="#FFFFFF" />
+            android:textSize="20dp" />
+        
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_margin"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/addRadioOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:button="@drawable/off_selector" />
+
+            <RadioButton
+                android:id="@+id/addRadioVib"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:button="@drawable/vibration_selector" />
+
+            <RadioButton
+                android:id="@+id/addRadioSound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/sound_selector" />
+        </RadioGroup>
 
         <CheckBox
             android:id="@+id/checkboxRepeat"
@@ -46,81 +74,75 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="@dimen/activity_margin"
+            android:layout_marginBottom="40dp"
             android:padding="@dimen/activity_margin" >
-
-            <CheckBox
-                android:id="@+id/checkMon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin"
-                android:text="월"
-                android:textSize="20dp" />
-
-            <CheckBox
-                android:id="@+id/checkTues"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin"
-                android:text="화"
-                android:textSize="20dp" />
-
-            <CheckBox
-                android:id="@+id/checkWedn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin"
-                android:text="수"
-                android:textSize="20dp" />
-
-            <CheckBox
-                android:id="@+id/checkThur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin"
-                android:text="목"
-                android:textSize="20dp" />
-
-            <CheckBox
-                android:id="@+id/checkFri"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin"
-                android:text="금"
-                android:textSize="20dp" />
-
-            <CheckBox
-                android:id="@+id/checkSat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin"
-                android:text="토"
-                android:textSize="20dp" />
 
             <CheckBox
                 android:id="@+id/checkSun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin"
-                android:text="일"
-                android:textSize="20dp" />
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="50dp"
+                android:button="@drawable/sun_selector" />
+            
+            <CheckBox
+                android:id="@+id/checkMon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:button="@drawable/mon_selector" />
+
+            <CheckBox
+                android:id="@+id/checkTues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:button="@drawable/tues_selector" />
+
+            <CheckBox
+                android:id="@+id/checkWedn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:button="@drawable/wedn_selector" />
+
+            <CheckBox
+                android:id="@+id/checkThur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:button="@drawable/thur_selector" />
+
+            <CheckBox
+                android:id="@+id/checkFri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:button="@drawable/fri_selector" />
+
+            <CheckBox
+                android:id="@+id/checkSat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/sat_selector" />
+
         </LinearLayout>
 
         <TextView
             android:id="@+id/txtTime"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_margin"
-            android:text="시간 선택"
+            android:text="약속 시간을 설정하세요"
             android:textSize="20dp" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/btnOk"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
         android:src="@drawable/img_write" />
 
 </RelativeLayout>
